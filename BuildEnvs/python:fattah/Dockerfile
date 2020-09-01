@@ -8,6 +8,6 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN mkdir -p /python/results
 RUN chmod -R 777 /python
 WORKDIR /python
-VOLUME . /python/results
+VOLUME /python/results
 CMD [ "/bin/bash" ]
 
