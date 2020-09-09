@@ -11,5 +11,6 @@ RUN mkdir /root/.ssh
 COPY authorized_keys /root/.ssh/
 WORKDIR /python
 VOLUME /python/results
-CMD [ "/bin/bash" ]
-
+RUN yum install -y openssh-server
+EXPOSE 22
+CMD [ "/bin/bash" ,"/usr/sbin/sshd"]
