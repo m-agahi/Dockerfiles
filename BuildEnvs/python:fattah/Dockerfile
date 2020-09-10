@@ -49,4 +49,4 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
 VOLUME /python/results
 WORKDIR /python
 EXPOSE 2222
-CMD [ "/usr/sbin/sshd", "-D" ]
+CMD [ "rm -f /run/nologin && /usr/sbin/sshd", "-D" ]
