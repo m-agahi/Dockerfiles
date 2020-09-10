@@ -43,10 +43,11 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
     mkdir -p /var/run/sshd && \
     ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_key && \
     ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_rsa_key && \
-    ssh-keygen -b 1024 -t dsa -f /etc/ssh/ssh_host_dsa_key
+    ssh-keygen -b 1024 -t dsa -f /etc/ssh/ssh_host_dsa_key && \
+    sed -i 's|#Port 22|Port 2222|g' /etc/ssh/sshd_config
 #
 #
 VOLUME /python/results
 WORKDIR /python
-EXPOSE 22
+EXPOSE 2222
 CMD [ "/usr/sbin/sshd", "-D" ]
