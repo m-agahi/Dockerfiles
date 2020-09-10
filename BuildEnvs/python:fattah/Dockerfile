@@ -1,16 +1,50 @@
+### This Dockerfile will create a suitable environment
+### for running python codes with jenkins pipelines
+### inside a docker node
+#
 FROM centos:latest
-
-RUN yum install -y epel-release
-RUN yum install -y python3 java-1.8.0-openjdk 
-RUN pip3 install virtualenv
-RUN python3 -m pip install --upgrade pip setuptools wheel
+LABEL maintainer="Moahmmadmahmoud Agahi <m.agahi@outlook.com>"
+#
+RUN yum update -y && \
+    yum upgrade -y && \
+    yum clean all
+RUN yum install -y \
+    epel-release \
+    python3 \
+    java-1.8.0-openjdk \
+    openssh-server \
+    wget \
+    curl \
+    git \
+    autoremove
+RUN python3 -m pip install --upgrade pip 
+RUN pip3 install \
+    virtualenv \
+    setuptools \
+    wheel
 RUN ln -s /usr/bin/python3 /usr/bin/python
-RUN mkdir -p /python/results
-RUN chmod -R 777 /python
-RUN mkdir /root/.ssh
-COPY authorized_keys /root/.ssh/
-WORKDIR /python
+#
+###This directory is for testing the output of python it can be removed 
+RUN mkdir -p /python/results && \
+    chmod -R 777 /python
+#
+#
+#adding jenkins user and configutin its environment
+RUN adduser jenkins && \
+    echo "jenkins:this is the new shit!" | chpasswd && \
+    mkdir /home/jenkins/.m2 && \
+    mkdir /home/jemkins/.ssh
+COPY authorized_keys /home/jenkins/.ssh/
+RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
+    chown -R jenkins:jenkins /home/jenkins/.ssh/
+#
+## Configuring sshd 
+RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' \
+    /etc/pam.d/sshd && \
+    mkdir -p /var/run/sshd
+#
+#
 VOLUME /python/results
-RUN yum install -y openssh-server
+WORKDIR /python
 EXPOSE 22
-CMD [ "/bin/bash" ,"/usr/sbin/sshd"]
+CMD [ "/usr/sbin/sshd", "-D" ]
