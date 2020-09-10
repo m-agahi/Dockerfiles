@@ -15,8 +15,7 @@ RUN yum install -y \
     openssh-server \
     wget \
     curl \
-    git \
-    autoremove
+    git 
 RUN python3 -m pip install --upgrade pip 
 RUN pip3 install \
     virtualenv \
