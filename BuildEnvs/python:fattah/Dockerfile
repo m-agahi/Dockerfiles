@@ -44,9 +44,14 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
     sed -i 's|#Port 22|Port 2222|g' /etc/ssh/sshd_config && \
     sed -i 's|HostKey /etc/ssh/ssh_host_ecdsa_key|#HostKey /etc/ssh/ssh_host_ecdsa_key|g' /etc/ssh/sshd_config && \
     sed -i 's|HostKey /etc/ssh/ssh_host_ed25519_key|#HostKey /etc/ssh/ssh_host_ed25519_key|g' /etc/ssh/sshd_config
+RUN echo -e "rm -f /run/nologin\n/usr/sbin/sshd -D" > /root/init.sh
+RUN chmod +x /root/init.sh
 #
 #
 VOLUME /python/results
 WORKDIR /python
 EXPOSE 2222
-CMD [ "rm -f /run/nologin && /usr/sbin/sshd", "-D" ]
+CMD . /root/init.sh
+
+### run the containre with this command : 
+### docker run -v <volumename> -itd --name <name> -p 2222:2222 <imagename>
