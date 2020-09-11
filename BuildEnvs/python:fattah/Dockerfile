@@ -32,7 +32,8 @@ RUN mkdir -p /python/results && \
 RUN adduser jenkins && \
     echo "jenkins:this is the new shit!" | chpasswd && \
     mkdir /home/jenkins/.m2 && \
-    mkdir /home/jenkins/.ssh
+    mkdir /home/jenkins/.ssh && \
+    mkdir /home/jenkins/agent
 COPY authorized_keys /home/jenkins/.ssh/
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
