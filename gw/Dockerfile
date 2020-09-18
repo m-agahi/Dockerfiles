@@ -13,8 +13,8 @@ RUN yum update -y && \
 ###This directory is for input and output files 
 #
 COPY gw.sh /root/
-VOLUME [ "/input" ]
-VOLUME [ "/output" ]
+#VOLUME [ "/input" D]
+#VOLUME [ "/output" ]
 WORKDIR /mnt
 CMD . /root/gw.sh
 
