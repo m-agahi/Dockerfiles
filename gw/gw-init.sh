@@ -30,7 +30,7 @@ do
         -v gw-output:/gw-output \
         --env SRCFILE='$file' \
         gw
-    sleep 
+    sleep 1
 done
 cd ../../
 rm -rf git-for-gw
