@@ -16,7 +16,7 @@ COPY gw.sh /root/
 VOLUME [ "/input" ]
 VOLUME [ "/output" ]
 WORKDIR /mnt
-CMD . /root/init.sh
+CMD . /root/gw.sh
 
 ### there shourld be 2 volumes created: output and input
 ### run the containre with this command : 
