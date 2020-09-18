@@ -4,17 +4,9 @@
 #
 FROM centos:latest
 LABEL maintainer="Moahmmadmahmoud Agahi <m.agahi@outlook.com>"
-#
-RUN yum update -y && \
-    yum upgrade -y && \
-    yum clean all
-
 ###This directory is for input and output files 
-#
 COPY gw.sh /root/
 ENV SRCFILE="/dev/zero"
-#VOLUME [ "/input" ]
-#VOLUME [ "/output" ]
 WORKDIR /root
 CMD . /root/gw.sh
 
