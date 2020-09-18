@@ -28,7 +28,7 @@ do
         -itd \
         -v gw-input:/gw-input:ro \
         -v gw-output:/gw-output \
-        --env SRCFILE='$file' \
+        --env SRCFILE=$file \
         gw
     sleep 0.1
 done
