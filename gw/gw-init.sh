@@ -4,9 +4,9 @@
 docker volume create gw-output
 docker volume create gw-input
 
-mkdir /var/lib/docker/volumes/gw-output/_data/files
-mkdir /var/lib/docker/volumes/gw-output/_data/reports
-mkdir /var/lib/docker/volumes/gw-input/files
+mkdir -p /var/lib/docker/volumes/gw-output/_data/files
+mkdir -p /var/lib/docker/volumes/gw-output/_data/reports
+mkdir -p /var/lib/docker/volumes/gw-input/_data/files
 
 mkdir git-for-gw
 cd git-for-gw
@@ -32,3 +32,5 @@ do
         --env SRCFILE='$file' \
         gw
 done
+cd ../../
+rm -rf git-for-gw
