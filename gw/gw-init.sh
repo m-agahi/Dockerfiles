@@ -26,11 +26,11 @@ do
     docker run \
         --rm \
         -itd \
-        --name gw \
         -v gw-input:/gw-input:ro \
         -v gw-output:/gw-output \
         --env SRCFILE='$file' \
         gw
+    sleep 
 done
 cd ../../
 rm -rf git-for-gw
