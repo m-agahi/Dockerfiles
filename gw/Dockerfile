@@ -5,7 +5,7 @@
 FROM centos:latest
 LABEL maintainer="Moahmmadmahmoud Agahi <m.agahi@outlook.com>"
 #
-ENV srcfile="/dev/zero"
+ENV SRCFILE="/dev/zero"
 RUN yum update -y && \
     yum upgrade -y && \
     yum clean all
@@ -13,9 +13,9 @@ RUN yum update -y && \
 ###This directory is for input and output files 
 #
 COPY gw.sh /root/
-#VOLUME [ "/input" D]
+#VOLUME [ "/input" ]
 #VOLUME [ "/output" ]
-WORKDIR /mnt
+WORKDIR /root
 CMD . /root/gw.sh
 
 ### there shourld be 2 volumes created: output and input
