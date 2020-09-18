@@ -5,7 +5,6 @@
 FROM centos:latest
 LABEL maintainer="Moahmmadmahmoud Agahi <m.agahi@outlook.com>"
 #
-ENV SRCFILE="/dev/zero"
 RUN yum update -y && \
     yum upgrade -y && \
     yum clean all
@@ -13,6 +12,7 @@ RUN yum update -y && \
 ###This directory is for input and output files 
 #
 COPY gw.sh /root/
+ENV SRCFILE="/dev/zero"
 #VOLUME [ "/input" ]
 #VOLUME [ "/output" ]
 WORKDIR /root
